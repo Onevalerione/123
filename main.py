@@ -1,5 +1,4 @@
-import pygame
-import sys
+import pygame, cycle
 from Player import player
 
 
@@ -63,12 +62,12 @@ def run():
 
     '''Создаем бесконечный цикл, в котором будут содержаться все события в игре'''
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+        cycle.events(Player)
+        Player.update_Player()
         screen.fill(bg_color)
         Player.output()
         pygame.display.flip()
 
 
 run()
+
