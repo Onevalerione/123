@@ -34,6 +34,11 @@ def run():
         [0, 590, 600, 10]
     ]
 
+    '''создаем список ключей в списке спрайтов игры и устанавливаем координаты ключей'''
+    keys_list = pygame.sprite.Group()
+    keys_list = [[750,50]]
+
+
     '''Созданием новый класс для игрока'''
 
 
@@ -55,11 +60,26 @@ def run():
             self.rect.x = x
             self.rect.y = y
 
+    class Keys(pygame.sprite.Sprite):
+        '''класс, который загрузит изображение ключа в спрайты'''
+        def __int__(self, x, y, img='P1.png'):
+            super().__init__()
+            self.image = pygame.image.load(img).convert_alpha()
+            self.rect = self.image.get_rect()
+            self.rect.x = x
+            self.rect.y = y
+
     '''добавляем список стен в список спрайтов стен и общий список спрайтов'''
-    for crd in wall_crds:
-        wall = Wall(crd[0], crd[1], crd[2], crd[3])
+    for crds in wall_crds:
+        wall = Wall(crds[0], crds[1], crds[2], crds[3])
         wall_list.add(wall)
         all_sprite_list.add(wall)
+
+    '''добавлем координаты ключей в список ключей и список спрайтов'''
+    for crds in keys_list:
+        key = Keys(crds[0], crds[1])
+        keys_list.add(key)
+        all_sprite_list.add(key)
 
     '''Создаем бесконечный цикл, в котором будут содержаться все события в игре'''
     while True:
