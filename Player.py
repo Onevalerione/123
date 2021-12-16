@@ -1,3 +1,4 @@
+"""
 import pygame
 
 
@@ -30,7 +31,7 @@ class player():
             self.rect.centery += 1
 
 
-
+"""
 
 
 
