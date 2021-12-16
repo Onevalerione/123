@@ -23,6 +23,8 @@ class Player(pygame.sprite.Sprite):
         self.change_y = 0
         self.walls = None
 
+        self.crowns = None
+        self.collected_crowns = 0
         self.diamonds = None
         self.collected_diamonds = 0
 
@@ -53,6 +55,10 @@ class Player(pygame.sprite.Sprite):
             self.collected_diamonds += 1
             diamond.kill()
 
+        crowns_hit_list = pygame.sprite.spritecollide(self, self.crowns, False)
+        for crown in crowns_hit_list:
+            self.collected_crowns += 1
+            crown.kill()
 
         if pygame.sprite.spritecollide(self, self.monsters, False):
             self.alive = False
@@ -80,7 +86,14 @@ class Diamond(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+class Crown(pygame.sprite.Sprite):
+    def __init__(self, x , y, img = 'Monster img.png'):
+        super().__init__()
 
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 class Monster(pygame.sprite.Sprite):
     def __init__(self, x, y, img = 'Monster img.png'):
@@ -144,6 +157,16 @@ for coord in diamonds_coord:
     all_sprite_list.add(diamond)
 
 
+
+
+crowns_list = pygame.sprite.Group()
+crowns_coord = [[500, 550]]
+
+for coord in crowns_coord:
+    crown = Crown(coord[0], coord[1])
+    crowns_list.add(crown)
+    all_sprite_list.add(crown)
+
 monsters_list = pygame.sprite.Group()
 monster_coord = [[1, 500], [400, 50]]
 for coord in monster_coord:
@@ -160,10 +183,11 @@ all_sprite_list.add(player)
 
 player.diamonds = diamonds_list
 player.monsters = monsters_list
+player.crowns = crowns_list
 
 font = pygame.font.SysFont('Arial', 24, True)
 text = font.render('END', True, WHITE)
-
+text1 = font.render('Win', True, WHITE)
 
 clock = pygame.time.Clock()
 done = False
