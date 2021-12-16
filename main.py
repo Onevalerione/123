@@ -229,6 +229,12 @@ while not done:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
 
+    if player.collected_crowns == 1:
+        screen.blit(text1, (100, 100))
+    else:
+        all_sprite_list.update()
+        all_sprite_list.draw(screen)
+
 
 
     pygame.display.flip()
