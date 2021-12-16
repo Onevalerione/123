@@ -190,7 +190,6 @@ text1 = font.render('Win', True, WHITE)
 clock = pygame.time.Clock()
 done = False
 
-
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
