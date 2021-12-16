@@ -87,7 +87,7 @@ class Diamond(pygame.sprite.Sprite):
         self.rect.y = y
 
 class Crown(pygame.sprite.Sprite):
-    def __init__(self, x , y, img = 'Monster img.png'):
+    def __init__(self, x , y, img = 'Crown1.png'):
         super().__init__()
 
         self.image = pygame.image.load(img).convert_alpha()
@@ -160,7 +160,7 @@ for coord in diamonds_coord:
 
 
 crowns_list = pygame.sprite.Group()
-crowns_coord = [[500, 550]]
+crowns_coord = [[550, 500]]
 
 for coord in crowns_coord:
     crown = Crown(coord[0], coord[1])
@@ -229,16 +229,17 @@ while not done:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
 
-    if player.collected_crowns == 1:
+    if player.collected_crowns == 1 and player.alive:
         screen.blit(text1, (100, 100))
     else:
-        all_sprite_list.update()
-        all_sprite_list.draw(screen)
+       all_sprite_list.draw(screen)
+
 
 
 
     pygame.display.flip()
     clock.tick(60)
+
 
 pygame.quit()
 
