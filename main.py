@@ -32,6 +32,8 @@ class Player(pygame.sprite.Sprite):
 
         self.monsters = pygame.sprite.Group()
         self.alive = True
+        self.virus = pygame.sprite.Group()
+
 
     '''функция, отвечающая за движения игрока и его взаимодействие с окружающими объектами'''
     def update(self):
@@ -76,6 +78,10 @@ class Player(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, self.monsters, False):
             self.alive = False
 
+        if pygame.sprite.spritecollide(self, self.virus, False):
+            self.change_x = 1
+            self.change_y = 1
+
 class Wall(pygame.sprite.Sprite):
     '''функция, отвечающая за создание стен'''
     def __init__(self, x, y, WIDTH, HEIGHT):
@@ -119,6 +125,8 @@ class Monster(pygame.sprite.Sprite):
         '''устанавливаем зону действия монстра по оси x'''
         self.start = x
         self.stop = x + random.randint(80, 90)
+        #self.start = y
+        #self.stop = y + random.randint(80, 90)
         self.direction = 1
 
     '''функция, отвечающая за движение монстра'''
@@ -135,6 +143,41 @@ class Monster(pygame.sprite.Sprite):
             self.direction = 1
 
         self.rect.x += self.direction * 2
+
+
+
+class Virus(pygame.sprite.Sprite):
+    '''функция, отвечающая за создание монстров'''
+    def __init__(self, x, y, img = 'Virus.png'):
+        super().__init__()
+        '''выгружаем изображение монстра и устаналиваем несколько на указанные позиции'''
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        '''устанавливаем зону действия монстра по оси x'''
+        self.start = x
+        self.stop = x + random.randint(80, 90)
+        #self.start = y
+        #.stop = y + random.randint(80, 90)
+        self.direction = 1
+
+    '''функция, отвечающая за движение монстра'''
+    def update(self):
+        '''если начальное положение монстра правее его допустимой зоны действия по оси x,
+        то начальное положение меняется на самую правую зону зону действия'''
+        if self.rect.x >= self.stop:
+            self.rect.x = self.stop
+            self.direction = -1
+        '''если начальное положение монстра левее его допустимой зоны действия по оси x,
+        то начальное положение меняется на самую левую зону зону действия'''
+        if self.rect.x <= self.start:
+            self.rect.x = self.start
+            self.direction = 1
+
+        self.rect.x += self.direction * 2
+
+
 
 
 '''иниализация запуска игры'''
@@ -252,11 +295,22 @@ monster_coord = [
     [300, 230]
 
 ]
+
+virus_list = pygame.sprite.Group()
+virus_coord = [
+    [290, 440]
+]
+
 '''добавляем данные об монстрах в список монстров и список спрайтов'''
 for coord in monster_coord:
     monster = Monster(coord[0], coord[1])
     monsters_list.add(monster)
     all_sprite_list.add(monster)
+
+for coord in virus_coord:
+    virus = Virus(coord[0], coord[1])
+    virus_list.add(virus)
+    all_sprite_list.add(virus)
 
 '''указываем начальное положение персонажа игрока и добавлаяем и все элементы игры связываем с игроком,
 дабы работало взаимодействие'''
@@ -270,7 +324,7 @@ all_sprite_list.add(player)
 player.diamonds = diamonds_list
 player.monsters = monsters_list
 player.crowns = crowns_list
-
+player.virus = virus_list
 '''Если игра завершена, на экране показываем текст с завершением игры'''
 font = pygame.font.SysFont('Calibri', 150, True)
 text = font.render('You Dead', True, RED)
