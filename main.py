@@ -140,7 +140,7 @@ class Monster(pygame.sprite.Sprite):
 '''иниализация запуска игры'''
 pygame.init()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
-pygame.display.set_caption('Maze')
+pygame.display.set_caption('ЛАБИРИНТ')
 
 
 '''указываем, что список спрайтов и стен в группе спрайтов '''
@@ -315,16 +315,23 @@ while not done:
     screen.fill(PURPLE)
     '''если персонаж умер, что выводим текст'''
     if not player.alive:
-        screen.blit(text, (100,220))
+        screen.blit(text, (100,10))
     #если это не произошло, то игра продолжается и обновляется
     else:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
 
-    if player.collected_crowns == 1 and player.alive:
+    if player.collected_crowns == 1 and player.alive and player.collected_diamonds ==3:
         screen.blit(text1, (240, 220))
-    else:
-       all_sprite_list.draw(screen)
+
+
+
+
+    if player.collected_crowns == 1:
+        all_sprite_list.update()
+
+
+
 
 
 
