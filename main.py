@@ -237,7 +237,7 @@ for coord in wall_coords:
 
 '''указываем, что список алмазов в группе спрайтов и указываем координаты алмазов'''
 diamonds_list = pygame.sprite.Group()
-diamonds_coord = [[500, 420], [120,390], [40,80]]
+diamonds_coord = [[510, 430], [130,410], [50,90]]
 
 '''добавляем данные об алмазах в список алмазов и список спрайтов'''
 for coord in diamonds_coord:
@@ -315,14 +315,14 @@ while not done:
     screen.fill(PURPLE)
     '''если персонаж умер, что выводим текст'''
     if not player.alive:
-        screen.blit(text, (100,100))
+        screen.blit(text, (200,200))
     #если это не произошло, то игра продолжается и обновляется
     else:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
 
     if player.collected_crowns == 1 and player.alive:
-        screen.blit(text1, (100, 100))
+        screen.blit(text1, (240, 220))
     else:
        all_sprite_list.draw(screen)
 
