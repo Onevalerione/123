@@ -118,7 +118,7 @@ class Monster(pygame.sprite.Sprite):
         self.rect.y = y
         '''устанавливаем зону действия монстра по оси x'''
         self.start = x
-        self.stop = x + random.randint(180, 240)
+        self.stop = x + random.randint(80, 90)
         self.direction = 1
 
     '''функция, отвечающая за движение монстра'''
@@ -244,8 +244,14 @@ for coord in crowns_coord:
     crowns_list.add(crown)
     all_sprite_list.add(crown)
 
+'''координаты монcтров'''
 monsters_list = pygame.sprite.Group()
-monster_coord = [[1, 500], [400, 50]]
+monster_coord = [
+    [190, 370],
+    [110, 80],
+    [300, 230]
+
+]
 '''добавляем данные об монстрах в список монстров и список спрайтов'''
 for coord in monster_coord:
     monster = Monster(coord[0], coord[1])
