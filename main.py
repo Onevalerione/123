@@ -315,7 +315,7 @@ while not done:
     screen.fill(PURPLE)
     '''если персонаж умер, что выводим текст'''
     if not player.alive:
-        screen.blit(text, (100,220))
+        screen.blit(text, (100,210))
     #если это не произошло, то игра продолжается и обновляется
     else:
         all_sprite_list.update()
