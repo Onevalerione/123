@@ -156,26 +156,24 @@ class Virus(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         '''устанавливаем зону действия монстра по оси x'''
-        self.start = x
-        self.stop = x + random.randint(80, 90)
-        #self.start = y
-        #.stop = y + random.randint(80, 90)
+        self.start = y
+        self.stop = y + random.randint(80, 90)
         self.direction = 1
 
     '''функция, отвечающая за движение монстра'''
     def update(self):
         '''если начальное положение монстра правее его допустимой зоны действия по оси x,
         то начальное положение меняется на самую правую зону зону действия'''
-        if self.rect.x >= self.stop:
-            self.rect.x = self.stop
+        if self.rect.y >= self.stop:
+            self.rect.y = self.stop
             self.direction = -1
         '''если начальное положение монстра левее его допустимой зоны действия по оси x,
         то начальное положение меняется на самую левую зону зону действия'''
-        if self.rect.x <= self.start:
-            self.rect.x = self.start
+        if self.rect.y <= self.start:
+            self.rect.y = self.start
             self.direction = 1
 
-        self.rect.x += self.direction * 2
+        self.rect.y += self.direction * 2
 
 
 
@@ -292,13 +290,13 @@ monsters_list = pygame.sprite.Group()
 monster_coord = [
     [190, 370],
     [110, 80],
-    [300, 230]
+    [265, 230]
 
 ]
 
 virus_list = pygame.sprite.Group()
 virus_coord = [
-    [290, 440]
+    [370, 320]
 ]
 
 '''добавляем данные об монстрах в список монстров и список спрайтов'''
@@ -364,7 +362,7 @@ while not done:
     '''если персонаж умер, что выводим текст'''
     if not player.alive:
         screen.blit(text, (100,220))
-    #если это не произошло, то игра продолжается и обновляется
+    #если это не произошло, то применяются настройки update
     else:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
@@ -373,14 +371,8 @@ while not done:
         screen.blit(text1, (240, 220))
 
 
-
-
     if player.collected_crowns == 1:
         all_sprite_list.update()
-
-
-
-
 
 
     '''Запуск дисплея игры'''
