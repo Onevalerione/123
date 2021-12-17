@@ -7,6 +7,7 @@ HEIGHT = 600
 BLACK = (0, 0, 0)
 PURPLE = (51, 0, 51)
 WHITE = (255, 255, 255)
+RED = (255, 0, 0)
 FPS = 30
 
 class Player(pygame.sprite.Sprite):
@@ -236,7 +237,7 @@ for coord in wall_coords:
 
 '''указываем, что список алмазов в группе спрайтов и указываем координаты алмазов'''
 diamonds_list = pygame.sprite.Group()
-diamonds_coord = [[100, 140], [235,250], [400,234]]
+diamonds_coord = [[500, 420], [120,390], [40,80]]
 
 '''добавляем данные об алмазах в список алмазов и список спрайтов'''
 for coord in diamonds_coord:
@@ -248,7 +249,7 @@ for coord in diamonds_coord:
 
 
 crowns_list = pygame.sprite.Group()
-crowns_coord = [[550, 500]]
+crowns_coord = [[410, 310]]
 
 for coord in crowns_coord:
     crown = Crown(coord[0], coord[1])
@@ -265,7 +266,7 @@ for coord in monster_coord:
 
 '''указываем начальное положение персонажа игрока и добавлаяем и все элементы игры связываем с игроком,
 дабы работало взаимодействие'''
-player = Player(35, 45)
+player = Player(0, 15)
 player.walls = wall_list
 '''добавленяем спрайт персонажа игрока в список спрайтов'''
 all_sprite_list.add(player)
@@ -277,9 +278,9 @@ player.monsters = monsters_list
 player.crowns = crowns_list
 
 '''Если игра завершена, на экране показываем текст с завершением игры'''
-font = pygame.font.SysFont('Arial', 24, True)
-text = font.render('END', True, WHITE)
-text1 = font.render('Win', True, WHITE)
+font = pygame.font.SysFont('Calibri', 150, True)
+text = font.render('You Dead', True, RED)
+text1 = font.render('Win!', True, WHITE)
 '''Запуск игры. Добавляем таймер'''
 clock = pygame.time.Clock()
 done = False
