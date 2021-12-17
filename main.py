@@ -185,7 +185,6 @@ pygame.init()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
 pygame.display.set_caption('ЛАБИРИНТ')
 
-
 '''указываем, что список спрайтов и стен в группе спрайтов '''
 all_sprite_list = pygame.sprite.Group()
 wall_list = pygame.sprite.Group()
@@ -276,18 +275,15 @@ for coord in diamonds_coord:
     diamonds_list.add(diamond)
     all_sprite_list.add(diamond)
 
-'''указываем, что список монстров в группе спрайтов и указываем координаты монстров'''
-
-
+'''указываем, что список корон в группе спрайтов и координаты корон'''
 crowns_list = pygame.sprite.Group()
 crowns_coord = [[410, 310]]
-
+'''добавляем данные о коронах в список корон и список спрайтов'''
 for coord in crowns_coord:
     crown = Crown(coord[0], coord[1])
     crowns_list.add(crown)
     all_sprite_list.add(crown)
-
-'''координаты монcтров'''
+'''укаазываем список монстров в группу спрайтов и координаты монcтров'''
 monsters_list = pygame.sprite.Group()
 monster_coord = [
     [190, 370],
@@ -295,7 +291,7 @@ monster_coord = [
     [300, 230]
 
 ]
-
+'''указываем список вирусов в группе спрайтов и координаты вирусов'''
 virus_list = pygame.sprite.Group()
 virus_coord = [
     [290, 440]
@@ -306,14 +302,14 @@ for coord in monster_coord:
     monster = Monster(coord[0], coord[1])
     monsters_list.add(monster)
     all_sprite_list.add(monster)
-
+'''добавляем данные о вирусе в список вирусов и список спрайтов'''
 for coord in virus_coord:
     virus = Virus(coord[0], coord[1])
     virus_list.add(virus)
     all_sprite_list.add(virus)
 
-'''указываем начальное положение персонажа игрока и добавлаяем и все элементы игры связываем с игроком,
-дабы работало взаимодействие'''
+'''указываем начальное положение персонажа игрока и добавлаяем все элементы игры, 
+связывая с игроком, дабы работало взаимодействие'''
 player = Player(0, 15)
 player.walls = wall_list
 '''добавленяем спрайт персонажа игрока в список спрайтов'''
@@ -368,20 +364,14 @@ while not done:
     else:
         all_sprite_list.update()
         all_sprite_list.draw(screen)
-
+    '''если игрок собрал все короны, остался жив и собрал все алмазы, игра завершается, 
+    выводя текст на экран'''
     if player.collected_crowns == 1 and player.alive and player.collected_diamonds ==3:
         screen.blit(text1, (240, 220))
 
-
-
-
+    '''если игрок получил корону, то список спрайтов обновится'''
     if player.collected_crowns == 1:
         all_sprite_list.update()
-
-
-
-
-
 
     '''Запуск дисплея игры'''
     pygame.display.flip()
