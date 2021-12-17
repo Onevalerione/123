@@ -335,8 +335,3 @@ while not done:
 
 '''выходим из игры'''
 pygame.quit()
-
-
-
-
-
