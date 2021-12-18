@@ -275,8 +275,6 @@ for coord in diamonds_coord:
     all_sprite_list.add(diamond)
 
 '''указываем, что список монстров в группе спрайтов и указываем координаты монстров'''
-
-
 crowns_list = pygame.sprite.Group()
 crowns_coord = [[410, 310]]
 
