@@ -8,6 +8,7 @@ from main import Player
 from main import Monster
 from main import Virus
 from main import Crown
+from main import Diamond
 
 '''Проверяем параметры экрана и их работу'''
 class DisplayModuleTest(unittest.TestCase):
@@ -127,6 +128,24 @@ class Player_Tests(unittest.TestCase):
         player.update()
         self.assertTrue(x)
 
+# Проверим что алмаз исчезает при взаимодействии с игроком
+    def test_diamond_kill(self):
+        pygame.init()
+        screen = pygame.display.set_mode([WIDTH, HEIGHT])
+        virus_list = pygame.sprite.Group()
+        wall_list = pygame.sprite.Group()
+        crowns_list = pygame.sprite.Group()
+        monsters_list = pygame.sprite.Group()
+        diamonds_list = pygame.sprite.Group()
+        player = Player(110,80)
+        diamond = Diamond(110, 80)
+        player.diamonds = diamonds_list
+        player.monsters = monsters_list
+        player.walls = wall_list
+        player.crowns = crowns_list
+        player.virus = virus_list
+        player.update()
+        self.assertFalse(diamond.kill())
 
 
 

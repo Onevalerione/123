@@ -144,8 +144,6 @@ class Monster(pygame.sprite.Sprite):
 
         self.rect.x += self.direction * 2
 
-
-
 class Virus(pygame.sprite.Sprite):
     '''функция, отвечающая за создание монстров'''
     def __init__(self, x, y, img = 'Virus.png'):
@@ -361,6 +359,7 @@ if __name__ == '__main__':
         '''если персонаж умер, что выводим текст'''
         if not player.alive:
             screen.blit(text, (100,220))
+            die_text = 1
         #если это не произошло, то применяются настройки update
         else:
             all_sprite_list.update()
