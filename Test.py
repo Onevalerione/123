@@ -66,12 +66,19 @@ class DisplayModuleTest(unittest.TestCase):
 
 class Player_Tests(unittest.TestCase):
     def test_player_die(self):
+        pygame.init()
+        screen = pygame.display.set_mode([WIDTH, HEIGHT])
         self.alive = False
         connect = self.alive
         #self.assertFalse(connect)
-        #p = Player(110,80)
-        #m = Monster(110, 80)
-        self.assertFalse(connect)
+        w =
+        p = Player(110,80)
+        monster = Monster(110, 80)
+        monsters_list = pygame.sprite.Group()
+        monsters_list.add(monster)
+        p.monsters = monsters_list
+        p.update()
+        self.assertFalse(p.alive)
 
 
 
