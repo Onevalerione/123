@@ -178,7 +178,7 @@ class Virus(pygame.sprite.Sprite):
 
 
 
-'''инициализация игры и дисплея'''
+'''инициализация дисплея и игры'''
 pygame.init()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
 pygame.display.set_caption('ЛАБИРИНТ')
