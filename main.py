@@ -132,7 +132,7 @@ class Monster(pygame.sprite.Sprite):
     '''функция, отвечающая за движение монстра'''
     def update(self):
         '''если начальное положение монстра правее его допустимой зоны действия по оси x,
-        то начальное положение меняется на самую правую зону зону действия'''
+        то начальное положение меняется на самую правую зону действия'''
         if self.rect.x >= self.stop:
             self.rect.x = self.stop
             self.direction = -1
@@ -275,8 +275,6 @@ for coord in diamonds_coord:
     all_sprite_list.add(diamond)
 
 '''указываем, что список монстров в группе спрайтов и указываем координаты монстров'''
-
-
 crowns_list = pygame.sprite.Group()
 crowns_coord = [[410, 310]]
 
@@ -316,7 +314,6 @@ player = Player(0, 15)
 player.walls = wall_list
 '''добавленяем спрайт персонажа игрока в список спрайтов'''
 all_sprite_list.add(player)
-
 
 
 player.diamonds = diamonds_list
