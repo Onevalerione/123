@@ -6,7 +6,8 @@ PURPLE = (51, 0, 51)
 from pygame import display
 from main import Player
 from main import Monster
-from pygame import image
+from main import Virus
+from main import Crown
 
 '''Проверяем параметры экрана и их работу'''
 class DisplayModuleTest(unittest.TestCase):
@@ -68,7 +69,6 @@ class Player_Tests(unittest.TestCase):
     def test_player_die(self):
         pygame.init()
         screen = pygame.display.set_mode([WIDTH, HEIGHT])
-        self.alive = False
         virus_list = pygame.sprite.Group()
         wall_list = pygame.sprite.Group()
         crowns_list = pygame.sprite.Group()
@@ -85,10 +85,53 @@ class Player_Tests(unittest.TestCase):
         player.update()
         self.assertFalse(player.alive)
 
+#Проверим что корона исчезает при взаимодействии с игроком
+    def test_collect_crown(self):
+        pygame.init()
+        screen = pygame.display.set_mode([WIDTH, HEIGHT])
+        virus_list = pygame.sprite.Group()
+        wall_list = pygame.sprite.Group()
+        crowns_list = pygame.sprite.Group()
+        monsters_list = pygame.sprite.Group()
+        diamonds_list = pygame.sprite.Group()
+        player = Player(410, 310)
+        crown = Crown(410, 310)
+        crowns_list.add(crown)
+        player.diamonds = diamonds_list
+        player.monsters = monsters_list
+        player.walls = wall_list
+        player.crowns = crowns_list
+        player.virus = virus_list
+        player.update()
+        self.assertFalse(crown.kill())
+
+
+#Проверим действие эффекта вируса по оси x
+    def test_virus(self):
+        pygame.init()
+        x = self.change_x
+        screen = pygame.display.set_mode([WIDTH, HEIGHT])
+        virus_list = pygame.sprite.Group()
+        wall_list = pygame.sprite.Group()
+        crowns_list = pygame.sprite.Group()
+        monsters_list = pygame.sprite.Group()
+        diamonds_list = pygame.sprite.Group()
+        player = Player(370, 320)
+        virus = Virus(370, 320)
+        virus_list.add(virus)
+        player.diamonds = diamonds_list
+        player.monsters = monsters_list
+        player.walls = wall_list
+        player.crowns = crowns_list
+        player.virus = virus_list
+        player.update()
+        self.assertTrue(x)
+
 
 
 
 if __name__ == '__main__':
     pygame.init()
+
 
 
