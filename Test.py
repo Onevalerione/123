@@ -64,6 +64,7 @@ class DisplayModuleTest(unittest.TestCase):
             (pygame.display.flip())
 
 class Player_Tests(unittest.TestCase):
+# Проверим, что при соприкосновении с монстром персонаж умирает
     def test_player_die(self):
         pygame.init()
         screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -83,7 +84,7 @@ class Player_Tests(unittest.TestCase):
         player.update()
         self.assertFalse(player.alive)
 
-#Проверим что корона исчезает при взаимодействии с игроком
+#Проверим, что при подборе короны она засчитывается как собранная
     def test_collect_crown(self):
         pygame.init()
         screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -101,9 +102,9 @@ class Player_Tests(unittest.TestCase):
         player.crowns = crowns_list
         player.virus = virus_list
         player.update()
-        self.assertFalse(crown.kill())
+        self.assertEqual(player.collected_crowns, 1)
 
-# Проверим что алмаз исчезает при взаимодействии с игроком
+#Проверим, что при подборе алмаза он засчитывается как собранный
     def test_diamond_kill(self):
         pygame.init()
         screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -114,13 +115,14 @@ class Player_Tests(unittest.TestCase):
         diamonds_list = pygame.sprite.Group()
         player = Player(110,80)
         diamond = Diamond(110, 80)
+        diamonds_list.add(diamond)
         player.diamonds = diamonds_list
         player.monsters = monsters_list
         player.walls = wall_list
         player.crowns = crowns_list
         player.virus = virus_list
         player.update()
-        self.assertFalse(diamond.kill())
+        self.assertEqual(player.collected_diamonds,1)
 
 
 

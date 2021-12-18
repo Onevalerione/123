@@ -11,8 +11,9 @@ RED = (255, 0, 0)
 FPS = 30
 
 class Player(pygame.sprite.Sprite):
-    '''функция, отвечающая за начальные данные персонажа игрока'''
+    '''класс игрока'''
     def __init__(self, x, y, img='PL1.png'):
+        '''функция, отвечающая за начальные данные персонажа игрока'''
         super().__init__()
         '''применяем изображение нпс игрока и устанавливаем персонажа на позицию'''
         self.image = pygame.image.load(img).convert_alpha()
@@ -35,8 +36,9 @@ class Player(pygame.sprite.Sprite):
         self.virus = pygame.sprite.Group()
 
 
-    '''функция, отвечающая за движения игрока и его взаимодействие с окружающими объектами'''
+
     def update(self):
+        '''функция, отвечающая за движения игрока и его взаимодействие с окружающими объектами'''
         '''если был сдвиг по оси x, то мы добавлаем к значению x в координатах
          положения персонажа игрока значение сдвига по оси х'''
         self.rect.x += self.change_x
@@ -84,8 +86,9 @@ class Player(pygame.sprite.Sprite):
             self.change_y = 1
 
 class Wall(pygame.sprite.Sprite):
-    '''функция, отвечающая за создание стен'''
+    '''класс стен'''
     def __init__(self, x, y, WIDTH, HEIGHT):
+        '''функция, отвечающая за создание стен'''
         super().__init__()
         '''формируем стены по установленным ширине и высоте с цветом BLACK'''
         self.image = pygame.Surface([WIDTH, HEIGHT])
@@ -96,8 +99,9 @@ class Wall(pygame.sprite.Sprite):
         self.rect.x = x
 
 class Diamond(pygame.sprite.Sprite):
-    '''функция, отвечающая за создание алмазов'''
+    '''класс Алмаза'''
     def __init__(self, x, y, img='Diamond.png'):
+        '''функция, отвечающая за создание алмазов'''
         super().__init__()
         '''выгружаем изображение алмаза и устанавливаем несколько на указанные позиции'''
         self.image = pygame.image.load(img).convert_alpha()
@@ -106,8 +110,9 @@ class Diamond(pygame.sprite.Sprite):
         self.rect.y = y
 
 class Crown(pygame.sprite.Sprite):
-    '''функция, отвечающая за создание короны'''
+    '''класс короны'''
     def __init__(self, x , y, img = 'Crown1.png'):
+        '''функция, отвечающая за создание короны'''
         super().__init__()
         '''выгружаем изображение короны и устанавливаем несколько на указанные позиции'''
         self.image = pygame.image.load(img).convert_alpha()
@@ -116,8 +121,9 @@ class Crown(pygame.sprite.Sprite):
         self.rect.y = y
 
 class Monster(pygame.sprite.Sprite):
-    '''функция, отвечающая за создание монстров'''
+    '''класс монстров'''
     def __init__(self, x, y, img = 'Monster img.png'):
+        '''функция, отвечающая за создание монстров'''
         super().__init__()
         '''выгружаем изображение монстра и устаналиваем несколько на указанные позиции'''
         self.image = pygame.image.load(img).convert_alpha()
@@ -131,8 +137,8 @@ class Monster(pygame.sprite.Sprite):
         #self.stop = y + random.randint(80, 90)
         self.direction = 1
 
-    '''функция, отвечающая за движение монстра'''
     def update(self):
+        '''функция, отвечающая за движение монстра'''
         '''если начальное положение монстра правее его допустимой зоны действия по оси x,
         то начальное положение меняется на самую правую зону действия'''
         if self.rect.x >= self.stop:
@@ -147,8 +153,9 @@ class Monster(pygame.sprite.Sprite):
         self.rect.x += self.direction * 2
 
 class Virus(pygame.sprite.Sprite):
-    '''функция, отвечающая за создание вирусов'''
+    '''класс вируса'''
     def __init__(self, x, y, img = 'Virus.png'):
+        '''функция, отвечающая за создание вируса'''
         super().__init__()
         '''выгружаем изображение вирус и устаналиваем несколько на указанные позиции'''
         self.image = pygame.image.load(img).convert_alpha()
@@ -160,8 +167,8 @@ class Virus(pygame.sprite.Sprite):
         self.stop = y + random.randint(80, 90)
         self.direction = 1
 
-    '''функция, отвечающая за движение вируса'''
     def update(self):
+        '''функция, отвечающая за движение вируса'''
         '''если начальное положение вируса правее его допустимой зоны действия по оси x,
         то начальное положение меняется на самую правую зону зону действия'''
         if self.rect.y >= self.stop:
@@ -367,10 +374,8 @@ if __name__ == '__main__':
         if player.collected_crowns == 1 and player.alive and player.collected_diamonds ==3:
             screen.blit(text1, (240, 220))
 
-
         if player.collected_crowns == 1:
             all_sprite_list.update()
-
 
         '''Запуск дисплея игры'''
         pygame.display.flip()
