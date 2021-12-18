@@ -277,7 +277,7 @@ if __name__ == '__main__':
     '''указываем, что список корон в группе спрайтов и указываем координаты корон'''
     crowns_list = pygame.sprite.Group()
     crowns_coord = [[410, 310]]
-    '''добавляем данные об коронах в список корон и список спрайтов'''
+    '''добавляем данные о коронах в список корон и список спрайтов'''
     for coord in crowns_coord:
         crown = Crown(coord[0], coord[1])
         crowns_list.add(crown)
@@ -297,7 +297,7 @@ if __name__ == '__main__':
         [370, 320]
     ]
 
-    '''добавляем данные об монстрах в список монстров и список спрайтов'''
+    '''добавляем данные о монстрах в список монстров и список спрайтов'''
     for coord in monster_coord:
         monster = Monster(coord[0], coord[1])
         monsters_list.add(monster)
