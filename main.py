@@ -316,7 +316,6 @@ player.walls = wall_list
 all_sprite_list.add(player)
 
 
-
 player.diamonds = diamonds_list
 player.monsters = monsters_list
 player.crowns = crowns_list
