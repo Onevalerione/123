@@ -4,7 +4,9 @@ WIDTH = 800
 HEIGHT = 600
 PURPLE = (51, 0, 51)
 from pygame import display
-
+from main import Player
+from main import Monster
+from pygame import image
 
 '''Проверяем параметры экрана и их работу'''
 class DisplayModuleTest(unittest.TestCase):
@@ -17,7 +19,7 @@ class DisplayModuleTest(unittest.TestCase):
         display.quit()
 
     def test_update(self):
-        #Проверяем, что последовательность типов событий может быть заблокирована
+        #Проверка движения объектов
         screen = pygame.display.set_mode([WIDTH,HEIGHT])
         screen.fill(PURPLE)
 
@@ -31,6 +33,7 @@ class DisplayModuleTest(unittest.TestCase):
         pygame.display.update(r3)
 
     def test_set_blocked__event_sequence(self):
+        # Проверяем, что последовательность типов событий может быть заблокирована
         event_types = [
             pygame.KEYDOWN,
             pygame.KEYUP
@@ -59,3 +62,19 @@ class DisplayModuleTest(unittest.TestCase):
         with self.assertRaises(pygame.error):
             (pygame.display.flip())
 
+
+
+class Player_Tests(unittest.TestCase):
+    def test_player_die(self):
+        self.alive = False
+        connect = self.alive
+        #self.assertFalse(connect)
+        #p = Player(110,80)
+        #m = Monster(110, 80)
+        self.assertFalse(connect)
+
+
+
+
+if __name__ == '__main__':
+    pygame.init()

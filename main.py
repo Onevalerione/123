@@ -378,3 +378,7 @@ while not done:
 
 '''выходим из игры'''
 pygame.quit()
+
+if __name__ == '__main__':
+    pygame.init()
+
