@@ -178,7 +178,7 @@ class Virus(pygame.sprite.Sprite):
 
 
 
-'''иниализация запуска игры'''
+'''инициализация игры и дисплея'''
 pygame.init()
 screen = pygame.display.set_mode([WIDTH,HEIGHT])
 pygame.display.set_caption('ЛАБИРИНТ')
@@ -316,8 +316,6 @@ player = Player(0, 15)
 player.walls = wall_list
 '''добавленяем спрайт персонажа игрока в список спрайтов'''
 all_sprite_list.add(player)
-
-
 
 player.diamonds = diamonds_list
 player.monsters = monsters_list
