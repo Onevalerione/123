@@ -6,7 +6,6 @@ PURPLE = (51, 0, 51)
 from pygame import display
 from main import Player
 from main import Monster
-from main import Virus
 from main import Crown
 from main import Diamond
 
