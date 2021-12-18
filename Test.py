@@ -63,8 +63,6 @@ class DisplayModuleTest(unittest.TestCase):
         with self.assertRaises(pygame.error):
             (pygame.display.flip())
 
-
-
 class Player_Tests(unittest.TestCase):
     def test_player_die(self):
         pygame.init()
@@ -104,8 +102,6 @@ class Player_Tests(unittest.TestCase):
         player.virus = virus_list
         player.update()
         self.assertFalse(crown.kill())
-
-
 
 # Проверим что алмаз исчезает при взаимодействии с игроком
     def test_diamond_kill(self):
