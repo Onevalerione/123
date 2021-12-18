@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         '''устанавливаем начально, что сдвигов не было, мы не трогали стены, 
-        мы не собирали алмазы, спрайты монстров задействованы и персонаж не умер'''
+        мы не собирали алмазы и короны, спрайты монстров и вируса задействованы и персонаж не умер'''
         self.change_x = 0
         self.change_y = 0
         self.walls = None
@@ -69,7 +69,8 @@ class Player(pygame.sprite.Sprite):
         for diamond in diamonds_hit_list:
             self.collected_diamonds += 1
             diamond.kill()
-
+        '''если игрок дошел до короны, то он засчитывается в счетчик наколенных корон и 
+        уничтожает саму корону'''
         crowns_hit_list = pygame.sprite.spritecollide(self, self.crowns, False)
         for crown in crowns_hit_list:
             self.collected_crowns += 1
@@ -77,7 +78,7 @@ class Player(pygame.sprite.Sprite):
         '''если игрок дошел до зоны движения монстра, то он умирает'''
         if pygame.sprite.spritecollide(self, self.monsters, False):
             self.alive = False
-
+        '''если игрок дошел до зоны движения вируса, то он умирает'''
         if pygame.sprite.spritecollide(self, self.virus, False):
             self.change_x = 1
             self.change_y = 1
@@ -105,9 +106,10 @@ class Diamond(pygame.sprite.Sprite):
         self.rect.y = y
 
 class Crown(pygame.sprite.Sprite):
+    '''функция, отвечающая за создание короны'''
     def __init__(self, x , y, img = 'Crown1.png'):
         super().__init__()
-
+        '''выгружаем изображение короны и устанавливаем несколько на указанные позиции'''
         self.image = pygame.image.load(img).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -137,7 +139,7 @@ class Monster(pygame.sprite.Sprite):
             self.rect.x = self.stop
             self.direction = -1
         '''если начальное положение монстра левее его допустимой зоны действия по оси x,
-        то начальное положение меняется на самую левую зону зону действия'''
+        то начальное положение меняется на самую левую зону действия'''
         if self.rect.x <= self.start:
             self.rect.x = self.start
             self.direction = 1
@@ -272,19 +274,16 @@ if __name__ == '__main__':
         diamond = Diamond(coord[0], coord[1])
         diamonds_list.add(diamond)
         all_sprite_list.add(diamond)
-
-    '''указываем, что список монстров в группе спрайтов и указываем координаты монстров'''
-
-
+    '''указываем, что список корон в группе спрайтов и указываем координаты корон'''
     crowns_list = pygame.sprite.Group()
     crowns_coord = [[410, 310]]
-
+    '''добавляем данные об коронах в список корон и список спрайтов'''
     for coord in crowns_coord:
         crown = Crown(coord[0], coord[1])
         crowns_list.add(crown)
         all_sprite_list.add(crown)
 
-    '''координаты монcтров'''
+    '''указываем, что список монстров в группе спрайтов и указываем координаты монстров'''
     monsters_list = pygame.sprite.Group()
     monster_coord = [
         [190, 370],
@@ -292,7 +291,7 @@ if __name__ == '__main__':
         [265, 230]
 
     ]
-
+    '''указываем, что список вирусов в группе спрайтов и указываем координаты вирусов'''
     virus_list = pygame.sprite.Group()
     virus_coord = [
         [370, 320]
@@ -303,7 +302,7 @@ if __name__ == '__main__':
         monster = Monster(coord[0], coord[1])
         monsters_list.add(monster)
         all_sprite_list.add(monster)
-
+    '''добавляем данные об вирусах в список вирусов и список спрайтов'''
     for coord in virus_coord:
         virus = Virus(coord[0], coord[1])
         virus_list.add(virus)
