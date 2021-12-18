@@ -67,6 +67,7 @@ class DisplayModuleTest(unittest.TestCase):
 class Player_Tests(unittest.TestCase):
     def test_player_die(self):
         pygame.init()
+        screen = pygame.display.set_mode([WIDTH, HEIGHT])
         self.alive = False
         virus_list = pygame.sprite.Group()
         wall_list = pygame.sprite.Group()
